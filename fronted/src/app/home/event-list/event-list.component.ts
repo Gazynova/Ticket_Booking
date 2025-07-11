@@ -12,7 +12,7 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class EventListComponent {
 
-  categories: string[] = ['All','Music', 'Art', 'Sports', 'Tech', 'Comedy','Food', 'Health','Movie'];
+  categories: string[] = ['All','Music', 'Art', 'Sports', 'Tech', 'Comedy','Food', 'Health','Movie','Dance'];
 
   allevents = [
     {
