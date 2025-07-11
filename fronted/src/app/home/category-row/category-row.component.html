@@ -1,0 +1,13 @@
+<div
+  class="flex justify-center gap-4 overflow-x-auto px-4 py-3 bg-black/30 backdrop-blur-sm border border-white/20 rounded-lg m-4"
+>
+  <button
+    *ngFor="let category of categories"
+    (click)="selectCategory(category)"
+    [class.bg-indigo-600]="selectedCategory === category"
+    [class.bg-gray-800]="selectedCategory !== category"
+    class="px-4 py-2 text-sm font-medium text-white rounded-full transition-colors duration-200"
+  >
+    {{ category }}
+  </button>
+</div>

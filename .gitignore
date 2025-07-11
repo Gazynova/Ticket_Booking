@@ -1,0 +1,16 @@
+# Node (for Angular or React)
+node_modules/
+dist/
+.env
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+
+# VS Code
+.vscode/
+
+# Logs
+*.log

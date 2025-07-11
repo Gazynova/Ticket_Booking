@@ -1,0 +1,51 @@
+Backend (ASP.NET Core)
+Copy
+TicketBookingSystem/
+├── Domain/
+│   ├── Entities/           # Core classes (User, Event, Booking, Payment)
+│   └── Exceptions/         # Custom exceptions (SeatUnavailableException)
+├── Application/
+│   ├── Features/           # CQRS Commands/Queries (CreateBookingCommand)
+│   ├── Services/           # Business logic (BookingService.cs)
+│   └── Interfaces/         # Contracts (IBookingRepository)
+├── Infrastructure/
+│   ├── Data/               # DbContext and Migrations
+│   ├── Repositories/       # EF Core implementations (BookingRepository)
+│   └── External/           # PaymentGateway, SMTPClient
+└── Presentation/
+    ├── Controllers/        # REST API endpoints
+    └── Middleware/         # Global error handling
+
+
+Frontend (Angular)
+Copy
+ticket-booking-ui/
+├── src/app/
+│   ├── auth/               # Login/Register components
+│   ├── booking/            # Seat selection, booking form
+│   ├── shared/             # Reusable components (header, seat-map)
+│   └── services/
+│       ├── api/            # HTTP clients (booking.service.ts)
+│       └── interceptors/   # Error handling
+
+
+
+2. Database Schema (Textual ER Diagram)
+Copy
+┌─────────────┐       ┌─────────────┐       ┌─────────────┐
+│    Users    │       │   Events    │       │  Bookings   │
+├─────────────┤       ├─────────────┤       ├─────────────┤
+│ UserId (PK) │<──┐   │ EventId (PK)│<──┐   │ BookingId(PK│
+│ Name        │   └───┤ UserId (FK) │   └───┤ UserId (FK) │
+│ Email       │       │ Venue       │       │ EventId (FK)│
+│ Role        │       │ AvailableSeats│     │ SeatNumber  │
+└─────────────┘       └─────────────┘       └─────────────┘
+                          │                     │
+                          ▼                     ▼
+                    ┌─────────────┐       ┌─────────────┐
+                    │ Payments    │       │Notifications│
+                    ├─────────────┤       ├─────────────┤
+                    │ PaymentId(PK│       │ NotifId (PK)│
+                    │ BookingId(FK│       │ BookingId(FK│
+                    │ Amount      │       │ Message     │
+                    └─────────────┘       └─────────────┘
