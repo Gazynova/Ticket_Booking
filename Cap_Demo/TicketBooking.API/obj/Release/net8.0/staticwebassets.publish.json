@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "weLaYx+GGgGy8Nu/A+G+76aylVov+9P0xBR1mQotbo0=",
+  "Source": "TicketBooking.API",
+  "BasePath": "_content/TicketBooking.API",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

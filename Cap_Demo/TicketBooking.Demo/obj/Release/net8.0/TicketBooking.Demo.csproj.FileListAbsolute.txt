@@ -1,0 +1,11 @@
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Demo\bin\Release\net8.0\TicketBooking.Demo.deps.json
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Demo\bin\Release\net8.0\TicketBooking.Demo.dll
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Demo\bin\Release\net8.0\TicketBooking.Demo.pdb
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Demo\obj\Release\net8.0\TicketBooking.Demo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Demo\obj\Release\net8.0\TicketBooking.Demo.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Demo\obj\Release\net8.0\TicketBooking.Demo.AssemblyInfo.cs
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Demo\obj\Release\net8.0\TicketBooking.Demo.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Demo\obj\Release\net8.0\TicketBooking.Demo.dll
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Demo\obj\Release\net8.0\refint\TicketBooking.Demo.dll
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Demo\obj\Release\net8.0\TicketBooking.Demo.pdb
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Demo\obj\Release\net8.0\ref\TicketBooking.Demo.dll

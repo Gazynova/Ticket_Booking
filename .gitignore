@@ -1,16 +1,22 @@
-# Node (for Angular or React)
-node_modules/
-dist/
-.env
+# Ignore node_modules and dist (Angular/React)
+frontend/node_modules/
+frontend/dist/
 
-# .NET
-bin/
-obj/
-*.user
-*.suo
+# Ignore environment files
+frontend/.env
 
-# VS Code
-.vscode/
+# Ignore .NET build artifacts
+backend/bin/
+backend/obj/
+backend/*.user
+backend/*.suo
 
 # Logs
 *.log
+
+# VSCode settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

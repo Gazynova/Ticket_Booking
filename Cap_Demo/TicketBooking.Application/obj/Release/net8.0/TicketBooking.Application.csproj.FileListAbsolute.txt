@@ -1,0 +1,15 @@
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\bin\Release\net8.0\TicketBooking.Application.deps.json
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\bin\Release\net8.0\TicketBooking.Application.dll
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\bin\Release\net8.0\TicketBooking.Application.pdb
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\bin\Release\net8.0\TicketBooking.Demo.dll
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\bin\Release\net8.0\TicketBooking.Demo.pdb
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\obj\Release\net8.0\TicketBooking.Application.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\obj\Release\net8.0\TicketBooking.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\obj\Release\net8.0\TicketBooking.Application.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\obj\Release\net8.0\TicketBooking.Application.AssemblyInfo.cs
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\obj\Release\net8.0\TicketBooking.Application.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\obj\Release\net8.0\TicketBo.0B3F2027.Up2Date
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\obj\Release\net8.0\TicketBooking.Application.dll
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\obj\Release\net8.0\refint\TicketBooking.Application.dll
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\obj\Release\net8.0\TicketBooking.Application.pdb
+C:\Users\User\Desktop\Ticket_Booking\Cap_Demo\TicketBooking.Application\obj\Release\net8.0\ref\TicketBooking.Application.dll
