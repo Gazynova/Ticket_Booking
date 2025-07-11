@@ -1,5 +1,5 @@
-<div class="relative overflow-hidden  backdrop-blur-md p-4   bg-gray-200">
-  <div class="flex animate-marquee whitespace-nowrap gap-6 ">
+<div class="relative overflow-hidden backdrop-blur-md p-4 bg-gray-200">
+  <div class="flex animate-marquee whitespace-nowrap gap-6">
     <div
       *ngFor="let event of featuredEvents"
       class="m-3 min-w-4/12 flex-2/4 bg-black backdrop-blur-md rounded-xl shadow-neutral-300 hover:shadow-neutral-200 hover:shadow-xl hover:scale-105 transition-transform duration-800 ease-in-out border border-white/20"
@@ -9,7 +9,8 @@
         [alt]="event.title"
         class="w-full h-48 object-cover rounded-t-xl"
       />
-      <div class="p-2 flex justify-between">
+      <!-- make this the hover‑target by adding `group` -->
+      <div class="p-2 flex justify-between group bg-white/5 rounded-md">
         <div>
           <h3 class="text-lg font-semibold mb-1 text-gray-200">
             {{ event.title }}
@@ -19,8 +20,9 @@
           </p>
         </div>
 
+        <!-- hide by default, show on parent hover -->
         <button
-          class="mt-4 w-auto px-4 py-2 m-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-shadow-md text-sm"
+          class="hidden group-hover:block mt-4 w-auto px-4 py-2 m-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm transition"
         >
           Book Now
         </button>
