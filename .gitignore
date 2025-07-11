@@ -10,6 +10,7 @@ backend/bin/
 backend/obj/
 backend/*.user
 backend/*.suo
+*.vs
 
 # Logs
 *.log
