@@ -27,7 +27,7 @@
         Book Now
       </button>
       <button
-        [routerLink]="['/event', event.id]"
+        (click)="getEventDetail(event.id)"
         class="mt-4 w-auto px-4 py-2 mx-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm transition-all duration-300"
       >
         View Details
