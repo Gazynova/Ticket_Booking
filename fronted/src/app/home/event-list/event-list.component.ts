@@ -6,13 +6,28 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-event-list',
-  imports: [CommonModule, NgFor, CategoryRowComponent,RouterLink],
+  imports: [CommonModule, NgFor, CategoryRowComponent, RouterLink],
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css'],
 })
 export class EventListComponent {
+  /**
+   *
+   */
+  constructor(private router: Router) {}
 
-  categories: string[] = ['All','Music', 'Art', 'Sports', 'Tech', 'Comedy','Food', 'Health','Movie','Dance'];
+  categories: string[] = [
+    'All',
+    'Music',
+    'Art',
+    'Sports',
+    'Tech',
+    'Comedy',
+    'Food',
+    'Health',
+    'Movie',
+    'Dance',
+  ];
 
   allevents = [
     {
@@ -175,8 +190,6 @@ export class EventListComponent {
     // }
   ];
 
-
-
   // https://images.pexels.com/photos/2306281/pexels-photo-2306281.jpeg/
   // https://images.pexels.com/photos/716276/pexels-photo-716276.jpeg
   // https://images.pexels.com/photos/919734/pexels-photo-919734.jpeg
@@ -191,5 +204,14 @@ export class EventListComponent {
       category === 'All'
         ? [...this.allevents]
         : this.allevents.filter((e) => e.category === category);
+  }
+
+  getEventDetail(id: number) {
+    console.log(id);
+    this.router.navigate(['/event-detail'], {
+      state: {
+        eventid: id,
+      },
+    });
   }
 }

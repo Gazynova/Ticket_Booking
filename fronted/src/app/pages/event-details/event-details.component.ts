@@ -35,10 +35,15 @@ export class EventDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      const idParam = params.get('id');
-      this.eventId = idParam ? parseInt(idParam, 10) : 0;
-      this.event = this.allEvents.find((e) => e.id === this.eventId);
-    });
+    // this.route.paramMap.subscribe((params) => {
+    //   const idParam = params.get('id');
+    //   this.eventId = idParam ? parseInt(idParam, 10) : 0;
+    //   this.event = this.allEvents.find((e) => e.id === this.eventId);
+    // });
+
+    this.eventId = history.state.eventid
+    this.event = this.allEvents.find((e) => e.id === this.eventId);
+
   }
+
 }

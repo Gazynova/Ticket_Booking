@@ -5,7 +5,7 @@ import { EventDetailsComponent } from './pages/event-details/event-details.compo
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
   {
-    path: 'event-details',
+    path: 'event-detail',
     component: EventDetailsComponent,
   },
 ];
