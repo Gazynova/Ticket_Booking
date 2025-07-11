@@ -6,6 +6,24 @@
 # dotenv files
 .env
 
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+Generated_Code/
+
+# Build logs
+*.log
+
+
 # User-specific files
 *.rsuser
 *.suo
