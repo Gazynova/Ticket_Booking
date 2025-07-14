@@ -3,10 +3,11 @@ import { CommonModule, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { CategoryRowComponent } from '../category-row/category-row.component';
 import { Router, RouterLink } from '@angular/router';
+import { GenericButtonComponent } from "../../shared/generic-button/generic-button.component";
 
 @Component({
   selector: 'app-event-list',
-  imports: [CommonModule, NgFor, CategoryRowComponent, RouterLink],
+  imports: [CommonModule, NgFor, CategoryRowComponent, RouterLink, GenericButtonComponent],
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css'],
 })
@@ -214,4 +215,9 @@ export class EventListComponent {
       },
     });
   }
+
+  bookNow(eventId: number) {
+  console.log('Booking for event', eventId);
+  // Booking logic
+}
 }

@@ -1,3 +1,4 @@
+<app-section-divider title="Featured Events"></app-section-divider>
 <div class="relative overflow-hidden backdrop-blur-md p-4 bg-gray-200">
   <div class="flex animate-marquee whitespace-nowrap gap-6">
     <div
@@ -21,11 +22,18 @@
         </div>
 
         <!-- hide by default, show on parent hover -->
-        <button
+        <!-- <button
           class="hidden group-hover:block mt-4 w-auto px-4 py-2 m-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm transition"
         >
           Book Now
-        </button>
+        </button> -->
+        <app-generic-button
+          class="hidden group-hover:block text-white"
+          label="Book Now"
+          theme="primary"
+          (clicked)="bookNow()"
+        >
+        </app-generic-button>
       </div>
     </div>
   </div>

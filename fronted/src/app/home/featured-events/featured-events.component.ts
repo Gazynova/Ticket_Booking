@@ -1,12 +1,14 @@
 import { CommonModule, NgFor } from "@angular/common";
 import { Component } from "@angular/core";
+import { SectionDividerComponent } from "../../shared/section-divider/section-divider.component";
+import { GenericButtonComponent } from "../../shared/generic-button/generic-button.component";
 
 
 @Component({
   selector: 'app-featured-events',
   templateUrl: './featured-events.component.html',
   styleUrls: ['./featured-events.component.css'],
-  imports: [NgFor,CommonModule],
+  imports: [NgFor, CommonModule, SectionDividerComponent, GenericButtonComponent],
 })
 export class FeaturedEventsComponent
 {
@@ -55,6 +57,11 @@ export class FeaturedEventsComponent
     },
   ];
 
+
+  bookNow() {
+  console.log("Booking from this page!");
+  // custom booking logic
+}
 
   
   

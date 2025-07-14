@@ -9,7 +9,7 @@
 >
   <div
     *ngFor="let event of events"
-    class="relative m-1 bg-white/10 backdrop-blur-md rounded-xl shadow-neutral-700 hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out border border-white/20 h-96 flex flex-col justify-end overflow-hidden"
+    class="relative m-1 bg-white/10 backdrop-blur-md rounded-xl shadow-neutral-700 hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out border border-white/100 h-96 flex flex-col justify-end overflow-hidden"
     [ngStyle]="{
       'background-image': 'url(' + event.imageUrl + ')',
       'background-size': 'cover',
@@ -21,18 +21,33 @@
       <p class="text-sm text-gray-300">
         {{ event.date }} · {{ event.location }}
       </p>
-      <button
+      <!-- <button
         class="mt-4 w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm"
       >
         Book Now
       </button>
+      
       <button
         (click)="getEventDetail(event.id)"
         class="mt-4 w-auto px-4 py-2 mx-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm transition-all duration-300"
       >
         View Details
-      </button>
-      
+      </button> -->
+      <div>
+        <app-generic-button
+          label="Book Now"
+          theme="primary"
+          (clicked)="bookNow(event.id)"
+          class= "text-white "
+        ></app-generic-button>
+
+        <app-generic-button
+          label="View Details"
+          theme="primary"
+          (clicked)="getEventDetail(event.id)"
+          class="mx-2 text-white"
+        ></app-generic-button>
+      </div>
     </div>
   </div>
 </div>
