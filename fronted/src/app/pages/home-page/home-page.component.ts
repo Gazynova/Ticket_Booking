@@ -3,6 +3,7 @@ import { HeaderComponent } from "../../shared/header/header.component";
 import { FeaturedEventsComponent } from "../../home/featured-events/featured-events.component";
 import { EventListComponent } from "../../home/event-list/event-list.component";
 
+
 @Component({
   selector: 'app-home-page',
   imports: [FeaturedEventsComponent, EventListComponent],

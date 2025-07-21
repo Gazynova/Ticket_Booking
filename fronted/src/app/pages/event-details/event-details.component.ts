@@ -1,49 +1,67 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../../services/service';
+import { environment } from '../../services/environment';
+import { GenericButtonComponent } from "../../shared/generic-button/generic-button.component";
+
 
 @Component({
   selector: 'app-event-details',
-  imports:[NgIf],
+  standalone: true,
+  imports: [NgIf, GenericButtonComponent],
   templateUrl: './event-details.component.html',
 })
 export class EventDetailsComponent implements OnInit {
   eventId: number = 0;
   event: any;
+  loading: boolean = false;
+  error: string = '';
+  env = environment;
 
-  allEvents = [
-    {
-      id: 1,
-      title: 'Jazz Night',
-      category: 'Music',
-      date: '2025-08-01',
-      location: 'Mumbai',
-      imageUrl: 'https://images.pexels.com/photos/716276/pexels-photo-716276.jpeg',
-      description: 'A soulful night of jazz with top Indian musicians.',
-    },
-    {
-      id: 2,
-      title: 'Rock Fest',
-      category: 'Music',
-      date: '2025-09-10',
-      location: 'Delhi',
-      imageUrl: 'https://images.pexels.com/photos/919734/pexels-photo-919734.jpeg',
-      description: 'Feel the energy of the ultimate rock music experience!',
-    },
-  ];
-
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: ApiService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    // this.route.paramMap.subscribe((params) => {
-    //   const idParam = params.get('id');
-    //   this.eventId = idParam ? parseInt(idParam, 10) : 0;
-    //   this.event = this.allEvents.find((e) => e.id === this.eventId);
-    // });
+    this.eventId = history.state.eventid;
 
-    this.eventId = history.state.eventid
-    this.event = this.allEvents.find((e) => e.id === this.eventId);
-
+    if (this.eventId) {
+      this.fetchEventDetails(this.eventId);
+    } else {
+      this.error = 'Invalid Event ID';
+    }
   }
 
+  fetchEventDetails(id: number) {
+    this.loading = true;
+    this.apiService.getProductById(id).subscribe({
+      next: (res) => {
+        this.event = res;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = 'Failed to load event details';
+        this.loading = false;
+      },
+    });
+  }
+
+
+ addToCart(productId: number) {
+    const userId = localStorage.getItem('userId');
+
+    if (!userId) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    this.apiService.addToCart({ productId, quantity: 1 ,userId}).subscribe({
+      next: () => alert('Added to cart'),
+      error: () => alert('Failed to add to cart'),
+    });
+  }
 }
+

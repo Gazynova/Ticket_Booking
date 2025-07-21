@@ -1,1 +1,14 @@
-<p>dashboard works!</p>
+
+<div class="flex min-h-screen bg-gray-100">
+  <!-- Sidebar for Categories -->
+  <app-sidebar
+    class="w-64 bg-white shadow-md"
+    (categorySelected)="filterProducts($event)">
+  </app-sidebar>
+
+  <!-- Main Content -->
+  <div class="flex-1 p-6">
+    <app-products [selectedCategory]="selectedCategory"></app-products>
+  </div>
+</div>
+

@@ -1,204 +1,76 @@
-// event-list.component.ts
 import { CommonModule, NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoryRowComponent } from '../category-row/category-row.component';
-import { Router, RouterLink } from '@angular/router';
-import { GenericButtonComponent } from "../../shared/generic-button/generic-button.component";
+import { GenericButtonComponent } from '../../shared/generic-button/generic-button.component';
+import { ApiService } from '../../services/service';
+import { environment } from '../../services/environment';
+import { Subscription } from 'rxjs';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-event-list',
-  imports: [CommonModule, NgFor, CategoryRowComponent, RouterLink, GenericButtonComponent],
+  imports: [CommonModule, NgFor, GenericButtonComponent],
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css'],
 })
-export class EventListComponent {
-  /**
-   *
-   */
-  constructor(private router: Router) {}
+export class EventListComponent implements OnInit {
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private searchService: SearchService
+  ) {}
 
-  categories: string[] = [
-    'All',
-    'Music',
-    'Art',
-    'Sports',
-    'Tech',
-    'Comedy',
-    'Food',
-    'Health',
-    'Movie',
-    'Dance',
-  ];
+  categories: string[] = ['All'];
+  allevents: any[] = [];
+  events: any[] = [];
+  searchSubscription!: Subscription;
+  searchQuery: string = '';
 
-  allevents = [
-    {
-      id: 1,
-      title: 'Music Fiesta',
-      date: 'Aug 15, 2025',
-      location: 'Mumbai',
-      category: 'Music',
-      imageUrl:
-        'https://images.pexels.com/photos/976866/pexels-photo-976866.jpeg',
-    },
-    {
-      id: 2,
-      title: 'Tech Talk',
-      date: 'Aug 20, 2025',
-      location: 'Bangalore',
-      category: 'Tech',
-      imageUrl:
-        'https://images.pexels.com/photos/2263436/pexels-photo-2263436.jpeg',
-    },
-    {
-      id: 3,
-      title: 'Tech Talk',
-      date: 'Aug 20, 2025',
-      location: 'Bangalore',
-      category: 'Tech',
-      imageUrl:
-        'https://images.pexels.com/photos/2263436/pexels-photo-2263436.jpeg',
-    },
-    {
-      id: 4,
-      title: 'Music Fiesta',
-      date: 'Aug 15, 2025',
-      location: 'Mumbai',
-      category: 'Music',
-      imageUrl:
-        'https://images.pexels.com/photos/976866/pexels-photo-976866.jpeg',
-    },
-    {
-      id: 5,
-      title: 'Tech Talk',
-      date: 'Aug 20, 2025',
-      location: 'Bangalore',
-      category: 'Tech',
-      imageUrl:
-        'https://images.pexels.com/photos/2263436/pexels-photo-2263436.jpeg',
-    },
-    {
-      id: 6,
-      title: 'Startup Showcase',
-      date: 'Sep 05, 2025',
-      location: 'Hyderabad',
-      category: 'Business',
-      imageUrl:
-        'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg',
-    },
-    {
-      id: 7,
-      title: 'Art & Soul',
-      date: 'Sep 12, 2025',
-      location: 'Pune',
-      category: 'Art',
-      imageUrl:
-        'https://images.pexels.com/photos/1435907/pexels-photo-1435907.jpeg',
-    },
-    {
-      id: 8,
-      title: 'Cine Carnival',
-      date: 'Sep 18, 2025',
-      location: 'Chennai',
-      category: 'Film',
-      imageUrl:
-        'https://images.pexels.com/photos/799137/pexels-photo-799137.jpeg',
-    },
-    {
-      id: 9,
-      title: 'Food Fusion Fest',
-      date: 'Sep 25, 2025',
-      location: 'Delhi',
-      category: 'Food',
-      imageUrl:
-        'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
-    },
-    {
-      id: 10,
-      title: 'Code Craze',
-      date: 'Oct 01, 2025',
-      location: 'Ahmedabad',
-      category: 'Tech',
-      imageUrl:
-        'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
-    },
-    {
-      id: 11,
-      title: 'Yoga in the Park',
-      date: 'Oct 07, 2025',
-      location: 'Kochi',
-      category: 'Health',
-      imageUrl:
-        'https://images.pexels.com/photos/3823039/pexels-photo-3823039.jpeg',
-    },
-    {
-      id: 12,
-      title: 'Photography Walk',
-      date: 'Oct 15, 2025',
-      location: 'Jaipur',
-      category: 'Photography',
-      imageUrl:
-        'https://images.pexels.com/photos/716276/pexels-photo-716276.jpeg',
-    },
-    {
-      id: 13,
-      title: 'Literature Lounge',
-      date: 'Oct 20, 2025',
-      location: 'Kolkata',
-      category: 'Literature',
-      imageUrl:
-        'https://images.pexels.com/photos/5904937/pexels-photo-5904937.jpeg',
-    },
-    {
-      id: 14,
-      title: 'Tech Talk',
-      date: 'Aug 20, 2025',
-      location: 'Bangalore',
-      category: 'Tech',
-      imageUrl:
-        'https://images.pexels.com/photos/2263436/pexels-photo-2263436.jpeg',
-    },
-    {
-      id: 15,
-      title: 'Design Jam',
-      date: 'Sep 12, 2025',
-      location: 'Mumbai',
-      category: 'Design',
-      imageUrl:
-        'https://images.pexels.com/photos/3184451/pexels-photo-3184451.jpeg',
-    },
-    {
-      id: 16,
-      title: 'Startup Insights',
-      date: 'Oct 05, 2025',
-      location: 'Hyderabad',
-      category: 'Business',
-      imageUrl:
-        'https://images.pexels.com/photos/705443/pexels-photo-705443.jpeg',
-    },
-    // {
-    //   "title": "AI Futures",
-    //   "date": "Nov 18, 2025",
-    //   "location": "Pune",
-    //   "category": "Artificial Intelligence",
-    //   "imageUrl": "https://images.pexels.com/photos/7432102/pexels-photo-7432102.jpeg"
-    // },
-    // {
-    //   "title": "Code Carnival",
-    //   "date": "Dec 10, 2025",
-    //   "location": "Chennai",
-    //   "category": "Programming",
-    //   "imageUrl": "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg"
-    // }
-  ];
+  ngOnInit() {
+    this.getAllCategories();
+    this.getAllEvents();
 
-  // https://images.pexels.com/photos/2306281/pexels-photo-2306281.jpeg/
-  // https://images.pexels.com/photos/716276/pexels-photo-716276.jpeg
-  // https://images.pexels.com/photos/919734/pexels-photo-919734.jpeg
-  // Add more dummy events
+    this.searchSubscription = this.searchService.searchQuery$.subscribe(
+      (query) => {
+        this.searchQuery = query;
+        this.filterProducts();
+      }
+    );
+  }
 
-  events = [...this.allevents]; // filtered list
+  filterProducts() {
+    this.events = this.allevents.filter((e) =>
+      e.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
 
-  ngOnInit() {}
+  getAllCategories() {
+    this.apiService.getAllCategories().subscribe({
+      next: (res: any) => {
+        this.categories = ['All', ...res.map((c: any) => c.name)];
+      },
+      error: () => {
+        alert('Failed to load categories');
+      },
+    });
+  }
+
+  getAllEvents() {
+    this.apiService.getAllProducts().subscribe({
+      next: (res: any) => {
+        this.allevents = res.map((e: any) => ({
+          ...e,
+          imageUrl: environment.img + e.image,
+          category: e.categoryName,
+        }));
+        this.events = [...this.allevents];
+      },
+      error: () => {
+        alert('Failed to load products');
+      },
+    });
+  }
 
   onCategorySelect(category: string) {
     this.events =
@@ -208,16 +80,26 @@ export class EventListComponent {
   }
 
   getEventDetail(id: number) {
-    console.log(id);
     this.router.navigate(['/event-detail'], {
-      state: {
-        eventid: id,
-      },
+      state: { eventid: id },
     });
   }
 
-  bookNow(eventId: number) {
-  console.log('Booking for event', eventId);
-  // Booking logic
-}
+  addToCart(productId: number) {
+    const userId = localStorage.getItem('userId');
+
+    if (!userId) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    this.apiService.addToCart({ productId, quantity: 1, userId }).subscribe({
+      next: () => alert('Added to cart'),
+      error: () => alert('Failed to add to cart'),
+    });
+  }
+
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
+  }
 }

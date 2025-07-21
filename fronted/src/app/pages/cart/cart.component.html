@@ -1,0 +1,104 @@
+<div class="p-4">
+  <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+
+  <!-- <div
+    *ngIf="cartItems.length > 0; else emptyCart"
+    class="flex flex-wrap gap-4"
+  >
+      <div
+        *ngFor="let item of cartItems"
+        class="bg-gray-500/20 w-xl p-4 rounded-xl mb-4 flex items-center justify-between shadow"
+      >
+        <div class="flex items-center space-x-4">
+          <img
+            [src]="env.img + item.product.image"
+            alt="{{ item.product.title }}"
+            class="w-24 h-24 rounded object-cover"
+          />
+          <div>
+            <h3 class="text-xl font-semibold text-black">
+              {{ item.product.title }}
+            </h3>
+            <p class="text-black-300">{{ item.product.description }}</p>
+            <p class="text-green-400 font-bold">₹ {{ item.product.price }}</p>
+            <p class="text-black-400 font-bold">Quantity:{{ item.quantity }}</p>
+          </div>
+        </div>
+        <app-generic-button
+          label="Remove"
+          theme="danger"
+          (clicked)="removeFromCart(item.id)"
+        >
+        </app-generic-button>
+      </div>
+    
+    <div class="mt-6 text-xl text-black">
+      Total Amount: <span class="font-bold">₹ {{ totalAmount }}</span>
+    </div>
+</div> -->
+
+  <!-- <app-generic-button 
+      label="Proceed to Checkout" 
+      theme="primary" 
+      class="mt-4 w-full"
+      (clicked)="proceedToCheckout()">
+    </app-generic-button> -->
+
+  <div *ngIf="cartItems.length > 0; else emptyCart" class="p-6 space-y-8">
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        *ngFor="let item of cartItems"
+        class="group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition duration-300 overflow-hidden flex flex-col"
+      >
+
+        <div class="overflow-hidden h-48">
+          <img
+            [src]="env.img + item.product.image"
+            alt="{{ item.product.title }}"
+            class="w-full h-full object-cover transform group-hover:scale-105 transition duration-300"
+          />
+        </div>
+
+      
+        <div class="p-4 flex flex-col flex-1 justify-between space-y-2">
+          <h3 class="text-lg font-bold text-gray-900 truncate">
+            {{ item.product.title }}
+          </h3>
+          <p class="text-gray-600 text-sm line-clamp-2">
+            {{ item.product.description }}
+          </p>
+
+          <div class="flex justify-between items-center">
+            <span class="text-green-600 font-bold text-lg"
+              >₹ {{ item.product.price }}</span
+            >
+            <span
+              class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full font-medium"
+              >Qty: {{ item.quantity }}</span
+            >
+          </div>
+
+          <app-generic-button
+            label="Remove"
+            theme="danger"
+            class="w-full"
+            (clicked)="removeFromCart(item.id)"
+          >
+          </app-generic-button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="bg-gray-100 rounded-xl p-4 flex flex-col items-center space-y-2 shadow-md max-w-md mx-auto"
+    >
+      <h2 class="text-2xl font-bold text-gray-900">Total Amount</h2>
+      <p class="text-3xl font-extrabold text-green-700">₹ {{ totalAmount }}</p>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <p class="text-gray-300 text-lg">Your cart is empty.</p>
+  </ng-template>
+</div>

@@ -1,7 +1,8 @@
-<app-category-row
+<!-- Category Selector -->
+<!-- <app-category-row
   [categories]="categories"
   (categorySelected)="onCategorySelect($event)"
-></app-category-row>
+></app-category-row> -->
 
 <!-- Event Grid -->
 <div
@@ -16,36 +17,24 @@
       'background-position': 'center'
     }"
   >
-    <div class="bg-black/10 backdrop-blur-3xl p-4">
-      <h3 class="text-lg font-semibold text-white mb-1">{{ event.title }}</h3>
-      <p class="text-sm text-gray-300">
-        {{ event.date }} · {{ event.location }}
+    <div class="bg-black/30 backdrop-blur-3xl p-4">
+      <h3 class="text-lg font-bold text-white mb-1">{{ event.title }}</h3>
+      <p class="text-sm text-gray-300 font-medium mb-0">
+         Price: ₹{{ event.price }}
       </p>
-      <!-- <button
-        class="mt-4 w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm"
-      >
-        Book Now
-      </button>
-      
-      <button
-        (click)="getEventDetail(event.id)"
-        class="mt-4 w-auto px-4 py-2 mx-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm transition-all duration-300"
-      >
-        View Details
-      </button> -->
-      <div>
+      <div class="flex flex-wrap gap-2">
         <app-generic-button
-          label="Book Now"
+          label="Add to Cart"
           theme="primary"
-          (clicked)="bookNow(event.id)"
-          class= "text-white "
+          (clicked)="addToCart(event.id)"
+          class="text-white"
         ></app-generic-button>
 
         <app-generic-button
           label="View Details"
-          theme="primary"
+          theme="secondary"
           (clicked)="getEventDetail(event.id)"
-          class="mx-2 text-white"
+          class="text-white"
         ></app-generic-button>
       </div>
     </div>

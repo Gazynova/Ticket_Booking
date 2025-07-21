@@ -3,22 +3,20 @@
   class="max-w-4xl mx-auto my-10 bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-lg border border-white/20"
 >
   <img
-    [src]="event.imageUrl"
+    [src]="env.img + event.image"
     alt="{{ event.title }}"
     class="w-full h-96 object-cover rounded-lg mb-6"
   />
-  <h1 class="text-3xl font-bold text-black mb-2">{{ event.title }}</h1>
-  <p class="text-gray-300 mb-1">
-    <strong>Date:</strong> {{ event.date }}
-  </p>
-  <p class="text-gray-300 mb-4">
-    <strong>Location:</strong> {{ event.location }}
-  </p>
-  <p class="text-white text-lg">{{ event.description }}</p>
 
-  <button
-    class="mt-6 px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md"
-  >
-    Book Now
-  </button>
+  <h1 class="text-3xl font-bold text-black mb-2">{{ event.title }}</h1>
+  <p class="text-black-300 mb-1">
+    <strong>Description :</strong> {{ event.description }}
+  </p>
+  <p class="text-black-300 mb-4"><strong>Price:</strong> {{ event.price }}</p>
+  <app-generic-button
+    label="Add to Cart"
+    theme="primary"
+    (clicked)="addToCart(event.id)"
+    class="text-white"
+  ></app-generic-button>
 </div>

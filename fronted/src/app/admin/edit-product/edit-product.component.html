@@ -1,0 +1,80 @@
+<div class="max-w-xl mx-auto p-8 bg-white rounded-xl shadow-md space-y-6 m-8">
+
+  <!-- Back Button -->
+  <!-- <app-generic-button
+    label="← Back"
+    theme="secondary"
+    class="mb-4"
+    (clicked)="goBack()"
+  ></app-generic-button> -->
+
+  <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">
+    Edit Product
+  </h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-5">
+
+    <!-- Title -->
+    <div class="space-y-1">
+      <label class="block text-gray-700 font-semibold">Title</label>
+      <input type="text" formControlName="title"
+        class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 outline-none transition"
+        placeholder="Enter product title" />
+    </div>
+
+    <!-- Description -->
+    <div class="space-y-1">
+      <label class="block text-gray-700 font-semibold">Description</label>
+      <textarea formControlName="description"
+        class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 outline-none transition"
+        rows="4" placeholder="Enter product description"></textarea>
+    </div>
+
+    <!-- Price -->
+    <div class="space-y-1">
+      <label class="block text-gray-700 font-semibold">Price</label>
+      <input type="number" formControlName="price"
+        class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 outline-none transition"
+        placeholder="Enter price" />
+    </div>
+
+    <!-- Category -->
+    <div class="space-y-1">
+      <label class="block text-gray-700 font-semibold">Category</label>
+      <select formControlName="categoryId"
+        class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 outline-none transition">
+        <option value="">Select Category</option>
+        <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+      </select>
+    </div>
+
+    <!-- Existing Image -->
+    <div class="space-y-1" *ngIf="existingImageUrl">
+      <label class="block text-gray-700 font-semibold">Existing Image</label>
+      <img [src]="'https://localhost:7236/' + existingImageUrl"
+        class="rounded-lg shadow-md border border-gray-200 h-48 w-full object-cover" />
+    </div>
+
+    <!-- Change Image -->
+    <div class="space-y-1">
+      <label class="block text-gray-700 font-semibold">Change Image</label>
+      <input type="file" (change)="onImageSelected($event)"
+        class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 outline-none transition" />
+    </div>
+
+    <!-- Update Button -->
+    <app-generic-button
+      label="Update Product"
+      theme="primary"
+      (clicked)="!(submitting || productForm.invalid) && onSubmit()"
+    ></app-generic-button>
+
+    <app-generic-button
+      label="← Back"
+      theme="secondary"
+      class="m-4"
+      (clicked)="goBack()"
+    ></app-generic-button>
+
+  </form>
+</div>
