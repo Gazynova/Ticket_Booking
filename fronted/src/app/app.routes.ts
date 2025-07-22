@@ -7,6 +7,7 @@ import { AddProductComponent } from './admin/add-product/add-product.component';
 import { EditProductComponent } from './admin/edit-product/edit-product.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { AuthGuard } from './guards/auth.guard'; // import the guard
+import { BlackholeComponent } from './blackhole/blackhole.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -32,4 +33,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'login', component: LoginComponent },
+  { path: 'blackhole', component: BlackholeComponent },
+ 
+
 ];
