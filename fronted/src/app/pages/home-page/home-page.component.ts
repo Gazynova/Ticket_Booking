@@ -6,7 +6,7 @@ import { EventListComponent } from "../../home/event-list/event-list.component";
 
 @Component({
   selector: 'app-home-page',
-  imports: [FeaturedEventsComponent, EventListComponent],
+  imports: [EventListComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })

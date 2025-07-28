@@ -26,6 +26,7 @@ export const routes: Routes = [
     path: 'admin/edit-product/:id',
     component: EditProductComponent,
     canActivate: [AuthGuard],
+    
   },
   {
     path: 'cart',
