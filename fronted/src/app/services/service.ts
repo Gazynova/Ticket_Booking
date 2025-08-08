@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { CartItem, Category } from '../models/category.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
   private apiUrl = environment.apiUrl;
@@ -39,8 +39,8 @@ export class ApiService {
   // }
 
   getCart(userId: string) {
-  return this.http.get<CartItem[]>(`${environment.apiUrl}/cart/${userId}`);
-}
+    return this.http.get<CartItem[]>(`${environment.apiUrl}/cart/${userId}`);
+  }
 
   addToCart(body: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/cart/add`, body);
@@ -50,11 +50,21 @@ export class ApiService {
     return this.http.delete(`${this.apiUrl}/cart/${id}`);
   }
 
-  //Categories API
- getAllCategories(): Observable<Category[]> {
-  return this.http.get<Category[]>(`${this.apiUrl}/category`);
-}
+  updateCartQuantity(cartItemId: number, quantity: number) {
+    return this.http.put(`${this.apiUrl}/Cart/update-quantity`, {
+      cartItemId,
+      quantity,
+    });
+  }
 
+  CartCount(userID: string) {
+    return this.http.get<number>(`${this.apiUrl}/cart/count/${userID}`);
+  }
+
+  //Categories API
+  getAllCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.apiUrl}/category`);
+  }
 
   getCategoryById(id: number) {
     return this.http.get(`${this.apiUrl}/category/${id}`);
@@ -71,11 +81,8 @@ export class ApiService {
   deleteCategory(id: number) {
     return this.http.delete(`${this.apiUrl}/category/${id}`);
   }
-//Login APi
+  //Login APi
   login(payload: any) {
-  return this.http.post(`${this.apiUrl}/auth/login`, payload);
-}
-
-
-
+    return this.http.post(`${this.apiUrl}/auth/login`, payload);
+  }
 }

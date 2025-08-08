@@ -45,13 +45,11 @@
     </app-generic-button> -->
 
   <div *ngIf="cartItems.length > 0; else emptyCart" class="p-6 space-y-8">
-    
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div
         *ngFor="let item of cartItems"
         class="group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition duration-300 overflow-hidden flex flex-col"
       >
-
         <div class="overflow-hidden h-48">
           <img
             [src]="env.img + item.product.image"
@@ -60,7 +58,6 @@
           />
         </div>
 
-      
         <div class="p-4 flex flex-col flex-1 justify-between space-y-2">
           <h3 class="text-lg font-bold text-gray-900 truncate">
             {{ item.product.title }}
@@ -73,26 +70,46 @@
             <span class="text-green-600 font-bold text-lg"
               >₹ {{ item.product.price }}</span
             >
-            <span
-              class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full font-medium"
-              >Qty: {{ item.quantity }}</span
+            <div
+              class="flex items-center space-x-2 border-1 border-gray-300 rounded-md"
             >
+              <button
+                (click)="updateQuantity(item, 'decrease')"
+                class="bg-gray-300 text-gray-800 px-2 py-1 rounded hover:bg-gray-400"
+              >
+                <!-- [disabled]="item.quantity <= 1"  -->
+                <i *ngIf="item.quantity <= 1" class="fas fa-trash"></i>
+                <span *ngIf="item.quantity > 1">-</span>
+              </button>
+
+              <span class="text-gray-700 text-sm font-medium w-6 text-center">
+                {{ item.quantity }}
+              </span>
+
+              <button
+                (click)="updateQuantity(item, 'increase')"
+                class="bg-gray-300 text-gray-800 px-2 py-1 rounded hover:bg-gray-400"
+              >
+                +
+              </button>
+            </div>
           </div>
 
-          <app-generic-button
-            label="Remove"
-            theme="danger"
-            class="w-full"
-            (clicked)="removeFromCart(item.id)"
-          >
-          </app-generic-button>
-          <app-generic-button
-            label="View Details"
-            theme="secondary"
-            class="w-full"
-            (clicked)="getEventDetail(item.product.id)" 
-          ></app-generic-button>
-          
+          <div class="flex">
+            <app-generic-button
+              label="Remove"
+              theme="danger"
+              class="mr-2"
+              (clicked)="removeFromCart(item.id)"
+            >
+            </app-generic-button>
+            <app-generic-button
+              label="View Details"
+              theme="secondary"
+              class="mr-2"
+              (clicked)="getEventDetail(item.product.id)"
+            ></app-generic-button>
+          </div>
         </div>
       </div>
     </div>

@@ -7,6 +7,7 @@ import { ApiService } from '../../services/service';
 import { environment } from '../../services/environment';
 import { Subscription } from 'rxjs';
 import { SearchService } from '../../services/search.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-event-list',
@@ -18,7 +19,8 @@ export class EventListComponent implements OnInit {
   constructor(
     private router: Router,
     private apiService: ApiService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private cartService: CartService
   ) {}
 
   categories: string[] = ['All'];
@@ -95,10 +97,16 @@ export class EventListComponent implements OnInit {
     }
 
     this.apiService.addToCart({ productId, quantity: 1, userId }).subscribe({
-      next: () => alert('Added to cart'),
+      next: () => {
+        this.cartService.getCartCount(userId); // refresh cart count
+        alert('Added to cart');
+      },
       error: () => alert('Failed to add to cart'),
     });
+   
   }
+
+  
 
   ngOnDestroy() {
     this.searchSubscription.unsubscribe();

@@ -123,6 +123,17 @@
           </svg>
         </button>
 
+        <button
+          [routerLink]="'/cart'"T
+          class="relative text-gray-700 hover:text-blue-600 transition"
+        >
+          <i class="fas fa-shopping-cart"></i>
+          <span
+            id="cart-count"
+            class="absolute -top-2 -right-2 bg-red-400 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
+            >{{CartCount}}</span
+          >
+        </button>
         <!-- 👤 Profile dropdown -->
         <div *ngIf="authService.isLoggedIn()" class="relative ml-3">
           <button
