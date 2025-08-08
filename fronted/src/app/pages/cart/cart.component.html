@@ -86,6 +86,13 @@
             (clicked)="removeFromCart(item.id)"
           >
           </app-generic-button>
+          <app-generic-button
+            label="View Details"
+            theme="secondary"
+            class="w-full"
+            (clicked)="getEventDetail(item.product.id)" 
+          ></app-generic-button>
+          
         </div>
       </div>
     </div>

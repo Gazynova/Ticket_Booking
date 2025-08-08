@@ -62,6 +62,7 @@ export class EventListComponent implements OnInit {
         this.allevents = res.map((e: any) => ({
           ...e,
           imageUrl: environment.img + e.image,
+          // imageUrl:  e.image,
           category: e.categoryName,
         }));
         this.events = [...this.allevents];

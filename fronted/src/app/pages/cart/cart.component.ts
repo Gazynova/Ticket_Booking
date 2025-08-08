@@ -4,6 +4,7 @@ import { ApiService } from '../../services/service';
 import { environment } from '../../services/environment';
 import { GenericButtonComponent } from '../../shared/generic-button/generic-button.component';
 import { CartItem } from '../../models/category.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
