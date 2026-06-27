@@ -85,4 +85,8 @@ export class ApiService {
   login(payload: any) {
     return this.http.post(`${this.apiUrl}/auth/login`, payload);
   }
+
+  register(payload: any) {
+    return this.http.post(`${this.apiUrl}/auth/register`, payload);
+  }
 }

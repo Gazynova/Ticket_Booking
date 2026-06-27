@@ -12,7 +12,7 @@ import { ApiService } from '../../services/service';
 export class CategoryRowComponent implements OnInit {
   private apiService = inject(ApiService);
 
-  @Input() categories: string[] = [];
+  @Input() categories: string[] = ['All'];
   @Output() categorySelected = new EventEmitter<string>();
 
   selectedCategory: string = '';

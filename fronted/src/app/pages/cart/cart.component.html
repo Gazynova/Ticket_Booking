@@ -37,25 +37,13 @@
     </div>
 </div> -->
 
-  <!-- <app-generic-button 
-      label="Proceed to Checkout" 
-      theme="primary" 
-      class="mt-4 w-full"
-      (clicked)="proceedToCheckout()">
-    </app-generic-button> -->
-
   <div *ngIf="cartItems.length > 0; else emptyCart" class="p-6 space-y-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div
-        *ngFor="let item of cartItems"
-        class="group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition duration-300 overflow-hidden flex flex-col"
-      >
+      <div *ngFor="let item of cartItems"
+        class="group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition duration-300 overflow-hidden flex flex-col">
         <div class="overflow-hidden h-48">
-          <img
-            [src]="env.img + item.product.image"
-            alt="{{ item.product.title }}"
-            class="w-full h-full object-cover transform group-hover:scale-105 transition duration-300"
-          />
+          <img [src]="env.img + item.product.image" alt="{{ item.product.title }}"
+            class="w-full h-full object-cover transform group-hover:scale-105 transition duration-300" />
         </div>
 
         <div class="p-4 flex flex-col flex-1 justify-between space-y-2">
@@ -67,16 +55,10 @@
           </p>
 
           <div class="flex justify-between items-center">
-            <span class="text-green-600 font-bold text-lg"
-              >₹ {{ item.product.price }}</span
-            >
-            <div
-              class="flex items-center space-x-2 border-1 border-gray-300 rounded-md"
-            >
-              <button
-                (click)="updateQuantity(item, 'decrease')"
-                class="bg-gray-300 text-gray-800 px-2 py-1 rounded hover:bg-gray-400"
-              >
+            <span class="text-green-600 font-bold text-lg">₹ {{ item.product.price }}</span>
+            <div class="flex items-center space-x-2 border-1 border-gray-300 rounded-md">
+              <button (click)="updateQuantity(item, 'decrease')"
+                class="bg-gray-300 text-gray-800 px-2 py-1 rounded hover:bg-gray-400">
                 <!-- [disabled]="item.quantity <= 1"  -->
                 <i *ngIf="item.quantity <= 1" class="fas fa-trash"></i>
                 <span *ngIf="item.quantity > 1">-</span>
@@ -86,43 +68,47 @@
                 {{ item.quantity }}
               </span>
 
-              <button
-                (click)="updateQuantity(item, 'increase')"
-                class="bg-gray-300 text-gray-800 px-2 py-1 rounded hover:bg-gray-400"
-              >
+              <button (click)="updateQuantity(item, 'increase')"
+                class="bg-gray-300 text-gray-800 px-2 py-1 rounded hover:bg-gray-400">
                 +
               </button>
             </div>
           </div>
 
           <div class="flex">
-            <app-generic-button
-              label="Remove"
-              theme="danger"
-              class="mr-2"
-              (clicked)="removeFromCart(item.id)"
-            >
+            <app-generic-button label="Remove" theme="danger" class="mr-2" (clicked)="removeFromCart(item.id)">
             </app-generic-button>
-            <app-generic-button
-              label="View Details"
-              theme="secondary"
-              class="mr-2"
-              (clicked)="getEventDetail(item.product.id)"
-            ></app-generic-button>
+            <app-generic-button label="View Details" theme="secondary" class="mr-2"
+              (clicked)="getEventDetail(item.product.id)"></app-generic-button>
           </div>
         </div>
       </div>
     </div>
 
     <div
-      class="bg-gray-100 rounded-xl p-4 flex flex-col items-center space-y-2 shadow-md max-w-md mx-auto"
-    >
-      <h2 class="text-2xl font-bold text-gray-900">Total Amount</h2>
-      <p class="text-3xl font-extrabold text-green-700">₹ {{ totalAmount }}</p>
+      class="bg-white rounded-2xl flex items-center justify-between p-4 shadow-lg max-w-md border border-gray-200 transition transform hover:scale-[1.02] hover:shadow-2xl">
+      <!-- Left Side: Text -->
+      <div class="flex flex-col">
+        <h2 class="text-sm font-semibold text-gray-600 tracking-wide uppercase">
+          Total Amount
+        </h2>
+        <p class="text-2xl font-extrabold text-green-600">
+          ₹ {{ totalAmount | number : "1.0-2" }}
+        </p>
+      </div>
+
+      <!-- Right Side: Button -->
+      <app-generic-button label="Proceed to Checkout" theme="success"
+        class="rounded-xl text-base shadow-md hover:shadow-lg transition" (clicked)="proceedToCheckout()">
+      </app-generic-button>
     </div>
   </div>
 
   <ng-template #emptyCart>
     <p class="text-gray-300 text-lg">Your cart is empty.</p>
   </ng-template>
+
+  <!-- Order Confirmation Mock Email -->
+  <app-mock-email *ngIf="showSuccessEmail" [order]="lastOrder" (close)="closeSuccessEmail()">
+  </app-mock-email>
 </div>

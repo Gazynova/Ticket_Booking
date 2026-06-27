@@ -1,0 +1,150 @@
+<div
+    class="auth-container min-h-screen flex items-center justify-center p-4 md:p-6 relative overflow-hidden bg-[#05070a]">
+    <div
+        class="absolute top-[-10%] left-[-10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-indigo-600/20 rounded-full blur-[80px] md:blur-[120px] animate-pulse">
+    </div>
+    <div
+        class="absolute bottom-[-10%] right-[-10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-emerald-500/10 rounded-full blur-[80px] md:blur-[120px] animate-pulse-slow">
+    </div>
+
+    <div
+        class="auth-card relative w-full max-w-5xl min-h-[600px] md:min-h-[650px] bg-white/[0.03] backdrop-blur-xl rounded-[2.5rem] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex overflow-hidden transition-all duration-500">
+
+        <div class="side-panel absolute top-0 left-0 w-1/2 h-full bg-gradient-to-br from-indigo-600 via-indigo-700 to-emerald-600 transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] z-20 hidden md:flex items-center justify-center text-white px-16 text-center"
+            [ngClass]="{'translate-x-0 rounded-r-[80px]': !isLoginMode, 'translate-x-full rounded-l-[80px]': isLoginMode}">
+
+            <div class="panel-content space-y-8">
+                <div class="space-y-4">
+                    <h1 class="text-5xl font-extrabold tracking-tight">{{ isLoginMode ? 'New Here?' : 'Welcome Back' }}
+                    </h1>
+                    <p class="text-white/70 text-lg font-light leading-relaxed">
+                        {{ isLoginMode ? 'Sign up and discover a world of possibilities with our community.' : 'To keep
+                        connected with us please login with your personal info.' }}
+                    </p>
+                </div>
+                <button (click)="toggleMode()"
+                    class="group relative px-10 py-3 border border-white/40 rounded-full overflow-hidden transition-all hover:border-white">
+                    <span class="relative z-10 font-bold tracking-widest text-sm uppercase">{{ isLoginMode ? 'Create
+                        Account' : 'Log In' }}</span>
+                    <div
+                        class="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 opacity-10">
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="forms-wrapper relative flex w-full h-full">
+
+            <div class="form-side w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center transition-all duration-700 ease-in-out"
+                [ngClass]="isLoginMode ? 'opacity-100 translate-x-0 relative z-10' : 'opacity-0 -translate-x-12 pointer-events-none absolute md:relative z-0'">
+
+                <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="space-y-6">
+                    <header class="text-center md:text-left">
+                        <h2 class="text-4xl font-black text-white tracking-tight">Sign In</h2>
+                        <div class="h-1.5 w-12 bg-indigo-500 rounded-full mt-2 mx-auto md:mx-0"></div>
+                    </header>
+
+                    <div class="space-y-4">
+                        <div class="group">
+                            <label class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest ml-1">Email
+                                Address</label>
+                            <div class="relative mt-1">
+                                <i
+                                    class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-indigo-400 transition-colors"></i>
+                                <input formControlName="email" type="email" placeholder="email@example.com"
+                                    class="w-full bg-white/5 border border-white/10 rounded-2xl py-3.5 pl-12 pr-4 text-white focus:bg-white/10 focus:border-indigo-500/50 focus:outline-none transition-all">
+                            </div>
+                        </div>
+
+                        <div class="group">
+                            <label
+                                class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest ml-1">Password</label>
+                            <div class="relative mt-1">
+                                <i
+                                    class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-indigo-400 transition-colors"></i>
+                                <input formControlName="password" type="password" placeholder="••••••••"
+                                    class="w-full bg-white/5 border border-white/10 rounded-2xl py-3.5 pl-12 pr-4 text-white focus:bg-white/10 focus:border-indigo-500/50 focus:outline-none transition-all">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-4 bg-white text-indigo-950 font-bold tracking-widest rounded-2xl hover:bg-indigo-50 transition-all active:scale-95 shadow-xl shadow-white/5">
+                        SIGN IN
+                    </button>
+
+                    <div class="md:hidden text-center mt-6">
+                        <p class="text-white/50 text-sm">New here?</p>
+                        <button type="button" (click)="toggleMode()"
+                            class="text-indigo-400 font-bold tracking-widest text-xs mt-1 uppercase underline underline-offset-4">
+                            Create an Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-side w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center transition-all duration-700 ease-in-out"
+                [ngClass]="!isLoginMode ? 'opacity-100 translate-x-0 relative z-10' : 'opacity-0 translate-x-12 pointer-events-none absolute md:relative z-0'">
+
+                <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="space-y-4">
+                    <header class="text-center md:text-left">
+                        <h2 class="text-4xl font-black text-white tracking-tight">Join Us</h2>
+                        <div class="h-1.5 w-12 bg-emerald-500 rounded-full mt-2 mx-auto md:mx-0"></div>
+                    </header>
+
+                    <div class="grid grid-cols-1 gap-3">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="group">
+                                <label class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest ml-1">Full
+                                    Name</label>
+                                <input formControlName="name" type="text" placeholder="John Doe"
+                                    class="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-4 text-white text-sm focus:border-emerald-500/50 focus:outline-none transition-all">
+                            </div>
+                            <div class="group">
+                                <label
+                                    class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest ml-1">Username</label>
+                                <input formControlName="username" type="text" placeholder="johndoe"
+                                    class="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-4 text-white text-sm focus:border-emerald-500/50 focus:outline-none transition-all">
+                            </div>
+                        </div>
+
+                        <div class="group">
+                            <label
+                                class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest ml-1">Email</label>
+                            <input formControlName="email" type="email" placeholder="john@example.com"
+                                class="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-4 text-white text-sm focus:border-emerald-500/50 focus:outline-none transition-all">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="group">
+                                <label
+                                    class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest ml-1">Password</label>
+                                <input formControlName="password" type="password" placeholder="••••"
+                                    class="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-4 text-white text-sm focus:border-emerald-500/50 focus:outline-none transition-all">
+                            </div>
+                            <div class="group">
+                                <label
+                                    class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest ml-1">Confirm</label>
+                                <input formControlName="confirmPassword" type="password" placeholder="••••"
+                                    class="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-4 text-white text-sm focus:border-emerald-500/50 focus:outline-none transition-all">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-4 bg-emerald-600 text-white font-bold tracking-widest rounded-2xl hover:bg-emerald-500 transition-all active:scale-95 shadow-lg shadow-emerald-900/20 mt-2">
+                        CREATE ACCOUNT
+                    </button>
+
+                    <div class="md:hidden text-center mt-6">
+                        <p class="text-white/50 text-sm">Already a member?</p>
+                        <button type="button" (click)="toggleMode()"
+                            class="text-emerald-400 font-bold tracking-widest text-xs mt-1 uppercase underline underline-offset-4">
+                            Log Back In
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

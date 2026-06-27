@@ -11,7 +11,7 @@ import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-event-list',
-  imports: [CommonModule, NgFor, GenericButtonComponent],
+  imports: [CommonModule, NgFor, GenericButtonComponent, CategoryRowComponent],
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.css'],
 })

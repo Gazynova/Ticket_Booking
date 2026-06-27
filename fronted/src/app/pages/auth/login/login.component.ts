@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { ApiService } from '../../../services/service';
-import { log } from 'console';
+
 @Component({
   selector: 'app-login',
   standalone: true,

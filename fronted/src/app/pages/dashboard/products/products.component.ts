@@ -1,4 +1,4 @@
-import { NgFor, NgStyle } from '@angular/common';
+import { NgFor, NgStyle, NgClass } from '@angular/common';
 import { Component, Input, OnChanges, inject, OnInit, OnDestroy } from '@angular/core';
 import { GenericButtonComponent } from '../../../shared/generic-button/generic-button.component';
 import { ApiService } from '../../../services/service';
@@ -10,7 +10,7 @@ import { SearchService } from '../../../services/search.service';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [NgFor, GenericButtonComponent, NgStyle],
+  imports: [NgFor, GenericButtonComponent, NgStyle, NgClass],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
@@ -21,6 +21,8 @@ export class ProductListComponent implements OnInit, OnChanges, OnDestroy {
   constructor(private router: Router) {}
 
   @Input() selectedCategory: string | null = null;
+  @Input() isSidebarCollapsed: boolean = false;
+  
   env = environment;
 
   products: any[] = [];

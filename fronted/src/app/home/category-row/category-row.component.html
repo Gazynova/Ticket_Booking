@@ -1,8 +1,8 @@
 <div
-  class="flex justify-center gap-4 overflow-x-auto px-4 py-3 bg-black/30 backdrop-blur-sm border border-white/20  my-6"
+  class="flex flex-wrap justify-center gap-4 px-4 py-3 bg-black/30 backdrop-blur-sm border border-white/20 my-6"
 >
   <button
-    *ngFor="let category of categories"
+    *ngFor="let category of categories | slice:0:5"
     (click)="selectCategory(category)"
     [class.bg-indigo-600]="selectedCategory === category"
     [class.bg-gray-800]="selectedCategory !== category"

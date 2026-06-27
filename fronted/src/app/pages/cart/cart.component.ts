@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { NgFor, NgIf, isPlatformBrowser, DecimalPipe } from '@angular/common';
 import { ApiService } from '../../services/service';
 import { environment } from '../../services/environment';
 import { GenericButtonComponent } from '../../shared/generic-button/generic-button.component';
 import { CartItem } from '../../models/category.model';
 import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
+import { PaymentService } from '../../services/payment.service';
+import { OrderService } from '../../services/order.service';
+import { Order } from '../../models/order.model';
+import { MockEmailComponent } from '../../shared/mock-email/mock-email.component';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [NgFor, NgIf, GenericButtonComponent],
+  imports: [NgFor, NgIf, GenericButtonComponent, DecimalPipe, MockEmailComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
 })
@@ -19,15 +23,23 @@ export class CartComponent implements OnInit {
   env = environment;
   totalAmount: number = 0;
   CartCount: number = 0;
+  
+  // Success Mock Email state
+  showSuccessEmail = false;
+  lastOrder: any = null;
 
   constructor(
     private api: ApiService,
     private router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    private paymentService: PaymentService,
+    private orderService: OrderService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
-  userId = localStorage.getItem('userId');
+  userId: string | null = null;
 
   ngOnInit() {
+    this.userId = isPlatformBrowser(this.platformId) ? localStorage.getItem('userId') : null;
     if (this.userId) {
       this.api.getCart(this.userId).subscribe({
         next: (res) => {
@@ -69,8 +81,47 @@ export class CartComponent implements OnInit {
   }
 
   proceedToCheckout() {
-    alert('Proceeding to checkout...');
-    // You can navigate or call API for checkout
+    if (this.cartItems.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+
+    this.paymentService.initiatePayment(
+      this.totalAmount, 
+      'user@example.com', // Placeholder
+      '9999999999',       // Placeholder
+      (response) => {
+        // Success Callback
+        console.log('Payment ID:', response.razorpay_payment_id);
+        
+        // Create Order Object
+        const newOrder: Order = {
+          id: crypto.randomUUID(), // Generate a unique ID
+          userId: this.userId || 'guest',
+          items: [...this.cartItems],
+          totalAmount: this.totalAmount,
+          paymentId: response.razorpay_payment_id,
+          date: new Date(),
+          status: 'CONFIRMED'
+        };
+
+        // Save Order
+        this.orderService.createOrder(newOrder).subscribe(() => {
+          this.lastOrder = newOrder;
+          this.showSuccessEmail = true;
+
+          // Clear Cart (UI)
+          this.cartItems = [];
+          this.totalAmount = 0;
+          this.cartService.updateCountManually(0);
+        });
+      },
+      (error) => {
+        // Failure Callback
+        console.error('Payment Failed:', error);
+        alert('Payment Failed. Please try again.');
+      }
+    );
   }
 
   getEventDetail(id: number) {
@@ -106,5 +157,10 @@ export class CartComponent implements OnInit {
         console.error('Failed to update quantity', err);
       },
     });
+  }
+
+  closeSuccessEmail() {
+    this.showSuccessEmail = false;
+    this.router.navigate(['/admin']); 
   }
 }

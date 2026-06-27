@@ -1,10 +1,9 @@
-import { NgIf } from '@angular/common';
+import { NgIf, Location } from '@angular/common'; // Added Location
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/service';
 import { environment } from '../../services/environment';
 import { GenericButtonComponent } from "../../shared/generic-button/generic-button.component";
-
 
 @Component({
   selector: 'app-event-details',
@@ -22,8 +21,13 @@ export class EventDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
+
+  goBack() {
+    this.location.back();
+  }
 
   ngOnInit() {
     this.eventId = history.state.eventid;

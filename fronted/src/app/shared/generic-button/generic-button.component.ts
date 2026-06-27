@@ -10,7 +10,17 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class GenericButtonComponent {
   @Input() label: string = 'Click Me';
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
-  @Input() theme: 'primary' | 'secondary' | 'danger'| 'none' = 'primary';
+@Input() theme: 
+  | 'primary' 
+  | 'secondary' 
+  | 'danger' 
+  | 'success'     // ✅ Green (checkout / success actions)
+  | 'confirm'     // ✅ Modern emerald tone
+  | 'info'        // ✅ Blue (general actions)
+  | 'warning'     // ✅ Yellow (alerts / cautions)
+  | 'special'     // ✅ Purple (premium/special actions)
+  | 'none' 
+  = 'primary';
   @Output() clicked = new EventEmitter<void>();
 
   handleClick() {

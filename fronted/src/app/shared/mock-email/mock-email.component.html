@@ -1,0 +1,91 @@
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden animate-slide-up">
+        <!-- Email Header -->
+        <div class="bg-indigo-600 p-8 text-center text-white relative">
+            <div class="absolute top-4 right-4 text-white/50 hover:text-white cursor-pointer transition-colors"
+                (click)="onClose()">
+                <i class="fas fa-times text-xl"></i>
+            </div>
+            <div
+                class="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-md">
+                <i class="fas fa-check text-2xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold uppercase tracking-widest">Order Confirmed!</h2>
+            <p class="text-indigo-100 text-sm mt-1">Order #{{ order?.id }}</p>
+        </div>
+
+        <!-- Email Body -->
+        <div class="p-8 md:p-12 overflow-y-auto max-h-[70vh]">
+            <p class="text-gray-600 mb-6">Hi there,</p>
+            <p class="text-gray-800 font-medium mb-8">
+                Thank you for booking with <span class="text-indigo-600 font-bold">TicketHub</span>! Your tickets are
+                confirmed and ready for the main event.
+            </p>
+
+            <div class="border-y border-gray-100 py-6 mb-8">
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Event Details</h3>
+                <div class="flex items-center justify-between mb-2" *ngFor="let item of order?.items">
+                    <div>
+                        <p class="text-gray-900 font-bold text-lg">{{ item.title }}</p>
+                        <p class="text-gray-500 text-xs">Quantity: {{ item.quantity }}</p>
+                    </div>
+                    <p class="text-gray-900 font-black">₹ {{ item.price * item.quantity | number:'1.0-2' }}</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-6 flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Total Amount Paid</p>
+                    <p class="text-sm text-gray-500">Paid via Razorpay</p>
+                </div>
+                <p class="text-3xl font-black text-indigo-600">₹ {{ order?.totalAmount | number:'1.0-2' }}</p>
+            </div>
+
+            <!-- Footer Message -->
+            <div class="mt-12 text-center text-gray-400 text-xs">
+                <p class="mb-2">Need help? Contact our support at support&#64;tickethub.com</p>
+                <p>&copy; 2026 TicketHub. All rights reserved.</p>
+            </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="p-8 border-t border-gray-100 bg-gray-50/50 flex justify-center">
+            <button (click)="onClose()"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition-all active:scale-95">
+                Go to Dashboard
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slide-up {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.3s ease-out;
+    }
+
+    .animate-slide-up {
+        animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+</style>

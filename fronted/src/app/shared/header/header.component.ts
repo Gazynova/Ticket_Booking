@@ -1,10 +1,11 @@
-import { CommonModule, NgIf } from '@angular/common';
-import { Component, HostListener, NgModule } from '@angular/core';
+import { CommonModule, NgIf, isPlatformBrowser } from '@angular/common';
+import { Component, HostListener, NgModule, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { SearchService } from '../../services/search.service';
 import { ApiService } from '../../services/service';
 import { CartService } from '../../services/cart.service';
+import { SidebarService } from '../../services/sidebar.service';
 
 @Component({
   selector: 'app-header',
@@ -18,21 +19,25 @@ export class HeaderComponent {
     public authService: AuthService,
     public searchService: SearchService,
     public api: ApiService,
-    private cartService: CartService
+    private cartService: CartService,
+    public sidebarService: SidebarService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   CartCount: number = 0;
 
   ngOnInit() {
-  this.cartService.cartCount$.subscribe(count => {
-    this.CartCount = count;
-  });
+    this.cartService.cartCount$.subscribe(count => {
+      this.CartCount = count;
+    });
 
-  const userId = localStorage.getItem('userId');
-  if (userId) {
-    this.cartService.getCartCount(userId);
+    if (isPlatformBrowser(this.platformId)) {
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        this.cartService.getCartCount(userId);
+      }
+    }
   }
-}
 
   logout() {
     localStorage.clear();
@@ -43,6 +48,7 @@ export class HeaderComponent {
   isProfileMenuOpen = false;
 
   toggleMenu() {
+    this.sidebarService.toggleSidebar();
     this.isMenuOpen = !this.isMenuOpen;
   }
 

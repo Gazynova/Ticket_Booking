@@ -25,4 +25,6 @@ export class CartService {
   updateCountManually(count: number) {
     this.cartCountSubject.next(count);
   }
+
+  
 }

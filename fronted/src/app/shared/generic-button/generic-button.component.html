@@ -3,10 +3,15 @@
   (click)="handleClick()"
   class="mt-4 w-auto px-4 py-2 rounded-md text-sm transition-all duration-300"
   [ngClass]="{
-    'bg-indigo-600 hover:bg-indigo-700 text-white': theme === 'primary',
-    'bg-gray-400 hover:bg-gray-500 text-black': theme === 'secondary',
-    'bg-red-600 hover:bg-red-700 text-white': theme === 'danger',
-    '': theme === 'none'
+     'bg-indigo-600 hover:bg-indigo-700 text-white': theme === 'primary',
+  'bg-gray-400 hover:bg-gray-500 text-black': theme === 'secondary',
+  'bg-red-600 hover:bg-red-700 text-white': theme === 'danger',
+  'bg-green-600 hover:bg-green-700 text-white': theme === 'success',        
+  'bg-emerald-500 hover:bg-emerald-600 text-white': theme === 'confirm',    
+  'bg-blue-600 hover:bg-blue-700 text-white': theme === 'info',             
+  'bg-yellow-500 hover:bg-yellow-600 text-black': theme === 'warning',      
+  'bg-purple-600 hover:bg-purple-700 text-white': theme === 'special',
+  '': theme === 'none'
   }"
 >
   {{ label }}

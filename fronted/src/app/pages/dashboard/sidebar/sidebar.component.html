@@ -1,9 +1,68 @@
-<div class="w-60 bg-gray-800 text-white p-4 space-y-3 h-full">
-  <h2 class="text-xl font-bold mb-4">Categories</h2>
+<div 
+  [ngClass]="{
+    'bg-gray-900/90 backdrop-blur-md text-white p-4 space-y-3 h-full transition-all duration-300 ease-in-out relative border-r border-gray-700/50': true,
+    'w-60': !isCollapsed,
+    'w-16': isCollapsed
+  }"
+>
+  
+  <!-- Toggle Button -->
   <button 
-    *ngFor="let category of categories" 
-    (click)="selectCategory(category)" 
-    class="block w-full text-left px-4 py-2 hover:bg-gray-700 rounded">
-    {{ category }}
+    (click)="toggleSidebar()" 
+    class="absolute top-4 right-2 p-2 hover:bg-gray-700 rounded-lg transition-colors duration-200 z-10"
+    [title]="isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'">
+    <i [class]="isCollapsed ? 'fas fa-bars' : 'fas fa-times'" class="text-white"></i>
   </button>
+
+
+
+  <!-- Categories Header -->
+  <h2 
+    *ngIf="!isCollapsed" 
+    class="text-xl font-bold mb-4 pr-8">
+    Categories
+  </h2>
+
+  <!-- Category Buttons -->
+  <div class="space-y-2" [class.mt-12]="isCollapsed">
+    <!-- "All" Category with Dropdown -->
+    <div>
+      <button 
+        (click)="isCollapsed ? selectCategory('All') : toggleAllDropdown()" 
+        [title]="isCollapsed ? 'All' : ''"
+        class="block w-full text-left px-3 py-2 hover:bg-gray-700 rounded transition-colors duration-200 flex items-center justify-between"
+        [class.justify-center]="isCollapsed"
+        [class.text-center]="isCollapsed">
+        <span *ngIf="!isCollapsed" class="flex items-center justify-between w-full">
+          <span>All</span>
+          <i [class]="isAllDropdownOpen ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-xs"></i>
+        </span>
+        <span *ngIf="isCollapsed" class="text-sm font-bold">A</span>
+      </button>
+
+      <!-- Dropdown Items (only when not collapsed) -->
+      <div 
+        *ngIf="!isCollapsed && isAllDropdownOpen" 
+        class="ml-4 mt-1 space-y-1 border-l-2 border-gray-600 pl-2">
+        <button 
+          *ngFor="let category of otherCategories" 
+          (click)="selectCategory(category)" 
+          class="block w-full text-left px-3 py-1.5 hover:bg-gray-700 rounded transition-colors duration-200 text-sm">
+          {{ category }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Other Categories (when collapsed, show all as individual buttons) -->
+    <div *ngIf="isCollapsed" class="space-y-2 mt-2">
+        <button 
+        *ngFor="let category of otherCategories" 
+        (click)="selectCategory(category)" 
+        [title]="category"
+        class="block w-full text-left px-3 py-2 hover:bg-gray-700 rounded transition-colors duration-200 justify-center text-center">
+        <span class="text-sm font-bold">{{ category.charAt(0).toUpperCase() }}</span>
+        </button>
+    </div>
+  </div>
 </div>
+
